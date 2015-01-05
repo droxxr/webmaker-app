@@ -4,18 +4,14 @@
     left: 0;
     top: 0;
     z-index: 2;
-
     width: 100%;
     height: @header-height;
-    border-bottom: 1px solid @lightGrey;
-    background-color: @white;
     text-align: center;
 
     h1 {
         display: inline-block;
-        margin: 13px auto 0 auto;
-        color: @highlight;
-        text-align: center;
+        vertical-align: middle; // Fixes v-alignment issue
+        margin: 0 auto;
         font-size: 1.1em;
         font-weight: 400;
         width: 100%;
@@ -25,19 +21,21 @@
         cursor: pointer;
     }
 
-    .save-btn {
-        @_btnSize: 30px;
-        @_vSpace: (@header-height - @_btnSize)/2 - 1;
+    // Base rules for navigationBar buttons
+    .btn {
         position: absolute;
-        right: @_vSpace;
-        top: @_vSpace;
-        height: @_btnSize;
-        line-height: @_btnSize;
+        border: none;
+        outline: none;
+        font-size: 13px;
+    }
+
+    .save-btn:extend(.navigationBar .btn) {
+        @_btnSize: 30px;
+        @vSpace-ruleSet();
+        right: 9px;
         padding: 0 10px 0 8px;
         background: @turquoise;
         color: @white;
-        font-size: 13px;
-        border: none;
         transition: background-color 0.3s ease-in-out;
         .fa {
             margin-right: 3px;
@@ -48,36 +46,58 @@
         }
     }
 
-    .nav-btn {
-        position: absolute;
-        top: 0;
-        min-width: 40px;
-        height: 100%;
+    .nav-btn:extend(.navigationBar .btn) {
+        @_btnSize: 40px;
+        @vSpace-ruleSet();
         background: none;
-        color: @highlight;
-        border: none;
-        outline: none;
-        padding: 5px 20px 0;
-        line-height: (@header-height - 10s);
-        text-decoration: none;
-        font-size: 13px;
+        padding: 0 20px;
         &.nav-btn-icon {
             font-size: inherit;
             padding-top: 0;
         }
-
-        &:first-child {
-            left: 0;
-        }
-        &:last-child {
-            right: 0;
-        }
         &.back {
-            line-height: @header-height;
-            padding-top: 0;
             font-size: 1.4em;
         }
+    }
 
+    // Vertically centers a box within a container
+    // Info: http://stackoverflow.com/questions/5412912/align-vertically-using-css-3
+    @vSpace-ruleSet: {
+      top: 50%;
+      -webkit-transform: translate(0%, -50);
+      -moz-transform: translate(0%, -50%);
+      -ms-transform: translate(0%, -50%);
+      height: @_btnSize;
+      line-height: @_btnSize;
+    };
 
+    // Mixin to calculate the vertical space
+    .vSpace-calc(@_btnSize, @b-value) {
+        @_vSpace: (@header-height - @_btnSize)/2 - @b-value; // @b-value takes into account of the navigationBar bottom border for some views
+    }
+
+    // Different navigationBar styles for different views
+    &.navigationBar-default {
+        line-height: @header-height - 1; // Subtract bottom border 1px and offset margin 1px
+        border-bottom: 1px solid @lightGrey;
+        background-color: @white;
+
+        h1:extend(.navigationBar h1) {
+            color: @highlight;
+        }
+        .nav-btn:extend(.navigationBar .nav-btn) {
+            color: @highlight;
+        }
+    }
+
+    &.navigationBar-alt {
+        line-height: @header-height;
+
+        h1:extend(.navigationBar h1) {
+            color: @white;
+        }
+        .nav-btn:extend(.navigationBar .nav-btn) {
+            color: @white;
+        }
     }
 }
