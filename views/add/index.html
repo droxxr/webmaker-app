@@ -1,6 +1,6 @@
 <div v-component="navigationBar" class="navigationBar-alt"></div>
 <div class="list-wrapper">
-    <ul>
+    <ul class="brick-list">
         <li v-repeat="block: blocks">
             <a data-block="{{block.id}}" class="brick" href="/make/{{app.id}}/edit">
                 <img src="{{block.icon}}" alt="{{block.name}}" />
@@ -8,7 +8,7 @@
             </a>
         </li>
     </ul>
-    <ul>
+    <ul class="brick-list">
         <li v-repeat="block: inputBlocks">
             <a data-block="{{block.id}}" class="brick" href="/make/{{app.id}}/edit">
                 <img src="{{block.icon}}" alt="{{block.name}}" />
@@ -16,5 +16,4 @@
             </a>
         </li>
     </ul>
-
 </div>

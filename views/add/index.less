@@ -18,7 +18,7 @@
         justify-content: center;
     }
 
-    ul {
+    ul.brick-list {
         display: block;
         position: relative;
         margin: 0;
@@ -26,36 +26,36 @@
 
         list-style: none;
         text-align: center;
-    }
 
-    li {
-        display: inline-block;
-        width: 30%;
-        max-width: 100px;
-        height: 30%;
+        li {
+            display: inline-block;
+            width: 30%;
+            max-width: 100px;
+            height: 30%;
 
-        list-style: none;
-        text-align: center;
-
-        &.spacer {
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        a {
-            color: @white;
+            list-style: none;
             text-align: center;
-            text-decoration: none;
-        }
 
-        img {
-            width: 90%;
-        }
+            &.spacer {
+                pointer-events: none;
+                opacity: 0;
+            }
 
-        p {
-            margin: 10px;
-            padding: 0;
-            font-size: 0.8em;
+            a {
+                color: @white;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            img {
+                width: 90%;
+            }
+
+            p {
+                margin: 10px;
+                padding: 0;
+                font-size: 0.8em;
+            }
         }
     }
 }
